@@ -5,7 +5,7 @@ function player:load()
     self:loadassets()
 
     self.x = 10
-    self.y = 300
+    self.y = 500
 
     self.width = 20
     self.height = 32
@@ -26,6 +26,8 @@ function player:load()
     self.state = "idle"
 
     self.justshot = false;
+
+    self.shootvelocity = 50;
 
     self.physics = {}
     self.physics.body = love.physics.newBody(world, self.x, self.y, "dynamic")
@@ -86,6 +88,7 @@ function player:update(dt)
     self:setdirection()
     self:setstate()
     self:checksides(dt)
+    self:checkposition(dt)
 end
 
 function player:checksides(dt)
@@ -236,20 +239,37 @@ end
 function player:shoot(key)
     if self.justshot == false and key == "e" then
         self.y = self.y - 150
-        self.xvel = math.cos(arrow.rotate)*arrow.power*50;
+        self.xvel = math.cos(arrow.rotate)*arrow.power*self.shootvelocity;
         
         print(math.sin(arrow.rotate))
 
         if self.grounded and math.sin(arrow.rotate) < 0 and arrow.power > 0 then
-            self.yvel = math.sin(arrow.rotate)*arrow.power*50;
+            self.yvel = math.sin(arrow.rotate)*arrow.power*self.shootvelocity;
             self.grounded = false
             self.justshot = true;
         elseif self.grounded and math.sin(arrow.rotate) > 0 and arrow.power > 0 then
-            self.yvel = -1 * math.sin(arrow.rotate)*arrow.power*50;
+            self.yvel = -1 * math.sin(arrow.rotate)*arrow.power*self.shootvelocity;
             self.justshot = true;
         elseif self.grounded == false then 
-            self.yvel = math.sin(arrow.rotate)*arrow.power*50;
+            self.yvel = math.sin(arrow.rotate)*arrow.power*self.shootvelocity;
             self.justshot = true;
         end
+    end
+end
+
+function player:checkposition(dt)
+    if player.y < 0 then
+        map:next()
+    end
+    if player.y > love.graphics.getHeight()/2 then
+        map:last()
+    end
+end
+
+function player:changemap(dir)
+    if (dir == "newmap") then
+        self.physics.body:setPosition(self.x, love.graphics.getHeight()/2)
+    elseif dir == "oldmap" then
+        self.physics.body:setPosition(self.x, 0)
     end
 end
