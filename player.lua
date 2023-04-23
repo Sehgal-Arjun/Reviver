@@ -21,6 +21,7 @@ function player:load()
     self.jumpamount = -1 * 500;
 
     self.grounded = false
+    self.doublejump = false;
     self.direction = "r" -- short for right
 
     self.state = "idle"
@@ -230,7 +231,11 @@ function player:draw()
 end
 
 function player:jump(key)
-    if self.grounded and (key == "w" or key == "space") then
+    if (self.grounded) and (key == "w" or key == "space") then
+        self.yvel = self.jumpamount
+        self.grounded = false
+    elseif self.doublejump and (key == "w" or key == "space") then
+        self.doublejump = false;
         self.yvel = self.jumpamount
         self.grounded = false
     end

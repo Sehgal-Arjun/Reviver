@@ -9,7 +9,7 @@ return {
   height = 40,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 4,
+  nextlayerid = 5,
   nextobjectid = 10,
   properties = {},
   tilesets = {
@@ -299,6 +299,21 @@ return {
           }
         }
       }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 4,
+      name = "entity",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {}
     }
   }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="10">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="10">
+ <editorsettings>
+  <export target="../../map2/2.lua" format="lua"/>
+ </editorsettings>
  <tileset firstgid="1" name="tileset gmtk-ts2" tilewidth="16" tileheight="16" tilecount="40" columns="8">
   <image source="../../../assets/caveassets/tileset gmtk-ts2.png" width="128" height="80"/>
  </tileset>
@@ -133,4 +136,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="4" name="entity"/>
 </map>

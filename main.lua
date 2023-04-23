@@ -2,6 +2,7 @@ require("player")
 require("arrow")
 love.graphics.setDefaultFilter("nearest", "nearest")
 require("map")
+require("feather")
 
 function love.load()
     world = love.physics.newWorld(0, 0)
@@ -16,6 +17,7 @@ function love.update(dt)
     world:update(dt)
     player:update(dt)
     arrow:update(dt)
+    feather.updateAll(dt)
     --map:update(dt)
 end
 
@@ -33,11 +35,14 @@ function love.draw()
 
     player:draw()
     arrow:draw()
+    feather.drawAll()
 
     love.graphics.pop()
 end
 
 function beginContact(a, b, collision)
+    if feather.beginContact(a, b, collision) == true then return end;
+
     player:beginContact(a, b, collision)
 end
 
