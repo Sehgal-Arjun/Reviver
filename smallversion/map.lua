@@ -5,7 +5,7 @@ require("player")
 require("arrow")
 
 function map:load()
-    self.currentlevel = 0
+    self.currentlevel = 5
     self.currentbackground = 0
 
     self:init()
